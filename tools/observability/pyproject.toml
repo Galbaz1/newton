@@ -1,0 +1,23 @@
+[project]
+name = "newton-observability"
+version = "0.1.0"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Wonder Why AI — Fausto Albers"}]
+description = "Local loopback MLflow service and idempotent evidence synchronizer for Newton"
+requires-python = ">=3.10"
+dependencies = ["mlflow[auth,mcp]==3.16.1"]
+
+[dependency-groups]
+dev = ["pytest==9.1.1"]
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["newton_observability"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

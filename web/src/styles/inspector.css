@@ -1,0 +1,183 @@
+/* Evidence inspector: excerpt, page viewer and the SVG series chart. */
+/* Inspector */
+.inspector-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.inspector-head h2 {
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--navy-900);
+  overflow-wrap: anywhere;
+}
+
+.excerpt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--teal-600);
+  background: var(--canvas);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.inspector > .btn {
+  align-self: flex-start;
+}
+
+.evidence-provenance {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+.evidence-provenance summary { cursor: pointer; font-weight: 600; }
+.provenance-fields { display: grid; gap: 8px; margin: 10px 0; }
+.provenance-fields dt { font-size: 0.75rem; color: var(--slate-500); }
+.provenance-fields dd { font-size: 0.8rem; overflow-wrap: anywhere; }
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pager {
+  justify-content: center;
+}
+
+.page-image {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  background: var(--slate-100);
+}
+
+.page-text {
+  margin: 0;
+  max-height: 340px;
+  overflow: auto;
+  padding: 10px;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  background: var(--canvas);
+  font: 0.8rem/1.55 var(--font-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Chart */
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chart svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  background: var(--surface);
+  touch-action: pan-y;
+}
+
+.chart-grid {
+  stroke: var(--slate-200);
+  stroke-width: 1;
+}
+
+.chart-label {
+  fill: var(--slate-500);
+  font: 10px var(--font-sans);
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--teal-700);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.chart-cursor {
+  stroke: var(--slate-500);
+  stroke-dasharray: 3 3;
+}
+
+.chart-dot {
+  fill: var(--teal-700);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.chart-readout {
+  font: 0.78rem var(--font-mono);
+  color: var(--slate-700);
+  min-height: 1.4em;
+}
+
+.chart-point-control {
+  display: grid;
+  gap: 0.4rem;
+  margin-block: 0.75rem;
+}
+
+.chart figcaption {
+  font-size: 0.83rem;
+  overflow-wrap: anywhere;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 6px;
+}
+
+.stats div {
+  padding: 6px 8px;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+}
+
+.stats dt {
+  font-size: 0.7rem;
+  color: var(--slate-500);
+}
+
+.stats dd {
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+/* Readable time-series evidence summary (SeriesExcerptSummary). */
+.series-excerpt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  white-space: normal;
+}
+
+.series-points {
+  display: flex;
+  flex-direction: column;
+  font: 0.78rem var(--font-mono);
+}
+
+.series-points li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 12px;
+  padding: 2px 0;
+  border-top: 1px solid var(--slate-200);
+}

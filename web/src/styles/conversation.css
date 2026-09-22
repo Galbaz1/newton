@@ -1,0 +1,287 @@
+/* Conversation turns, citations, evidence cards, composer and correction. */
+/* Conversation */
+.conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.conversation-head h2 {
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--navy-900);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 120px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.message-user {
+  align-self: flex-end;
+  max-width: 85%;
+  background: var(--navy-800);
+  border-color: var(--navy-800);
+  color: #f1f5f9;
+}
+
+.message-user .meta,
+.message-user .message-role {
+  color: #a9bccd;
+}
+
+.message-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.message-role {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal-700);
+}
+
+.message-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Superseded answers stay readable but are clearly no longer current. */
+.message-superseded {
+  background: repeating-linear-gradient(135deg, #fff, #fff 10px, #f6f5fb 10px, #f6f5fb 20px);
+  border-style: dashed;
+  border-color: #bdb8de;
+}
+
+.message-superseded .message-text,
+.message-superseded .evidence-list {
+  opacity: 0.62;
+}
+
+.message-error {
+  border-color: var(--red-700);
+}
+
+.message-pending {
+  opacity: 0.7;
+}
+
+.cite {
+  display: inline-block;
+  padding: 0 5px;
+  margin: 0 1px;
+  border: 1px solid var(--teal-600);
+  border-radius: 4px;
+  background: var(--teal-100);
+  color: var(--teal-700);
+  font: 650 0.74rem/1.5 var(--font-mono);
+  cursor: pointer;
+}
+
+.cite-missing {
+  border-color: var(--slate-300);
+  background: var(--slate-100);
+  color: var(--slate-500);
+  cursor: help;
+}
+
+.evidence-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 8px;
+}
+
+.evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  background: var(--canvas);
+  text-align: left;
+  cursor: pointer;
+}
+
+.evidence:hover {
+  border-color: var(--teal-600);
+}
+
+.evidence-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+
+.evidence-file {
+  font-size: 0.8rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.evidence-excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 0.8rem;
+  color: var(--slate-700);
+}
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--slate-300);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.composer textarea {
+  border: 0;
+  padding: 2px;
+  outline-offset: 4px;
+}
+
+.composer-actions {
+  justify-content: space-between;
+}
+
+.composer-actions select {
+  width: auto;
+  max-width: 60%;
+}
+
+.correction {
+  padding: 10px;
+  border: 1px dashed #bdb8de;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+/* Rendered Markdown answers (AnswerMarkdown). Compact, document-like rhythm. */
+.markdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin-top: 6px;
+  font-size: 0.98rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--navy-900);
+}
+
+.markdown h1,
+.markdown h2 {
+  font-size: 1.05rem;
+}
+
+.markdown ul,
+.markdown ol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-left: 22px;
+}
+
+.markdown ul {
+  list-style: disc;
+}
+
+.markdown li > ul,
+.markdown li > ol {
+  margin-top: 3px;
+}
+
+.markdown code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--slate-100);
+  font: 0.82rem var(--font-mono);
+}
+
+.markdown pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: var(--slate-100);
+}
+
+.markdown pre code {
+  padding: 0;
+  background: none;
+}
+
+.markdown blockquote {
+  padding-left: 10px;
+  border-left: 3px solid var(--slate-300);
+  color: var(--slate-700);
+}
+
+.markdown hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--slate-200);
+}
+
+.markdown a {
+  color: var(--teal-700);
+}
+
+.markdown table {
+  font: 0.82rem var(--font-sans);
+}
+
+.markdown th,
+.markdown td {
+  white-space: normal;
+}
+
+.md-unlinked {
+  color: var(--slate-500);
+}

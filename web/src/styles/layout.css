@@ -1,0 +1,228 @@
+/* App shell: header, three panes on desktop, one pane plus tab bar on mobile. */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  min-height: 46px;
+  background: var(--navy-900);
+  color: #e6edf3;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.brand::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 2px;
+  background: var(--teal-600);
+}
+
+.health {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.74rem;
+  color: #9fb2c4;
+}
+
+.health-bad {
+  color: #ffb4a8;
+}
+
+.user-email {
+  max-width: 28ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.locale-select {
+  width: auto;
+  padding: 3px 24px 3px 7px;
+  border: 1px solid #496178;
+  border-radius: 4px;
+  background: var(--navy-900);
+  color: #e6edf3;
+  font-size: 0.78rem;
+}
+
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 310px) minmax(0, 1fr) minmax(320px, 440px);
+}
+
+.pane {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.pane-context {
+  background: var(--slate-100);
+  border-right: 1px solid var(--slate-200);
+}
+
+.pane-conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--canvas);
+}
+
+.pane-sources {
+  background: var(--surface);
+  border-left: 1px solid var(--slate-200);
+}
+
+.pane-tabs {
+  display: none;
+}
+
+.center-screen {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 24px;
+}
+
+/* Sign-in */
+.auth {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 400px);
+  gap: 48px;
+  align-items: center;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.auth-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-intro .brand {
+  color: var(--navy-900);
+}
+
+.auth-intro ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--slate-700);
+}
+
+.auth-intro li {
+  padding-left: 16px;
+  border-left: 2px solid var(--teal-600);
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgb(15 28 40 / 7%);
+}
+
+@media (max-width: 1100px) {
+  .workspace {
+    grid-template-columns: minmax(240px, 280px) minmax(0, 1fr) minmax(300px, 360px);
+  }
+}
+
+/* Mobile and narrow tablets: one pane at a time, chosen by the bottom tabs. */
+@media (max-width: 900px) {
+  .workspace {
+    display: block;
+    overflow: hidden;
+  }
+
+  .pane {
+    display: none;
+    height: 100%;
+    border: 0;
+  }
+
+  .workspace[data-pane='context'] .pane-context,
+  .workspace[data-pane='sources'] .pane-sources {
+    display: block;
+  }
+
+  .workspace[data-pane='conversation'] .pane-conversation {
+    display: flex;
+  }
+
+  .pane-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--surface);
+    border-top: 1px solid var(--slate-200);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pane-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 4px;
+    border: 0;
+    border-top: 2px solid transparent;
+    background: none;
+    font-size: 0.72rem;
+    color: var(--slate-500);
+    cursor: pointer;
+  }
+
+  .pane-tab-active {
+    color: var(--teal-700);
+    border-top-color: var(--teal-600);
+    font-weight: 600;
+  }
+
+  .health-item:not(.health-bad):nth-child(n + 2) {
+    display: none;
+  }
+
+  .user-email {
+    max-width: 14ch;
+  }
+
+  .auth {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* 16px inputs stop iOS from zooming the page on focus. */
+  input:not([type='file']),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}

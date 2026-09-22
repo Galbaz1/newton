@@ -1,0 +1,40 @@
+[project]
+name = "newton-investigation"
+version = "0.1.0"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Wonder Why AI — Fausto Albers"}]
+description = "Evidence-grounded industrial machine investigations"
+requires-python = ">=3.14"
+dependencies = [
+  "fastapi==0.141.1",
+  "starlette==1.6.0",
+  "uvicorn==0.53.0",
+  "sqlalchemy==2.0.54",
+  "psycopg[binary]==3.3.6",
+  "pydantic==2.13.5",
+  "pydantic-settings==2.15.0",
+  "python-multipart==0.0.32",
+  "pypdfium2==5.13.0",
+  "pillow==12.3.0",
+  "httpx2==2.13.0",
+  "weaviate-client==4.23.1",
+]
+
+[dependency-groups]
+dev = ["pytest==9.1.1", "ruff==0.16.8", "pypdf==6.19.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["server"]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

@@ -1,0 +1,26 @@
+# Local credentials and private runtime
+.env
+.env.*
+!.env.example
+.runtime/
+**/secrets.env
+**/auth.ini
+**/*.db
+**/*.db-*
+# Environments and build output
+.venv/
+**/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+node_modules/
+dist/
+coverage/
+.DS_Store
+# Private project operations and source material
+.beads/
+research/
+recordings/
+data/
+models/

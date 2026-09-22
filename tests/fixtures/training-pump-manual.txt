@@ -1,0 +1,7 @@
+SYNTHETIC VERIFICATION FIXTURE. Not a real manufacturer manual.
+Training pump P-01 maintenance manual, revision B.
+Applicability: synthetic training pump P-01 only.
+The maximum continuous housing temperature is 80 degrees Celsius.
+This limit supersedes revision A, which listed 100 degrees Celsius.
+A housing temperature reading below this limit alone does not establish safe operation or diagnose a fault.
+Record measurement location, timestamp and operating conditions before comparison.
