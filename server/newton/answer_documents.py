@@ -1,11 +1,14 @@
 """Resolve PDF candidates to bounded, scoped original content before inference."""
 
 import hashlib
+import re
+
+from sqlalchemy import or_, select
 
 from . import documents, provider_pdfs
 from ._storage import read_original
 from .config import settings
-from .models import Source
+from .models import Page, Source
 
 
 def _source(db, machine, record):
@@ -20,6 +23,49 @@ def _source(db, machine, record):
     ):
         raise ValueError("Source context changed before native PDF interpretation")
     return source
+
+
+def exact_page_evidence(db, machine, question: str) -> list[dict]:
+    """Return explicitly requested PDF pages when their filename is in the question.
+
+    Semantic retrieval is useful for subject questions, but it must not replace
+    an exact page address such as ``page 71 of manual.pdf``.
+    """
+    match = re.search(r"\b(?:p(?:agina)?\.?|page)\s*(\d{1,3})\b", question, re.IGNORECASE)
+    if match is None:
+        return []
+    number = int(match.group(1))
+    normalized = question.casefold()
+    sources = db.scalars(
+        select(Source).where(
+            Source.company_id == machine.company_id,
+            or_(Source.machine_id == machine.id, Source.machine_id.is_(None)),
+            Source.data_class.in_(["original", "derived"]),
+            Source.status.in_(["ready", "needs_text"]),
+            Source.media_type == "application/pdf",
+        )
+    )
+    for source in sources:
+        if source.filename.casefold() not in normalized:
+            continue
+        page = db.scalar(select(Page).where(Page.source_id == source.id, Page.number == number))
+        if page is None:
+            return []
+        return [
+            {
+                "source_id": source.id,
+                "filename": source.filename,
+                "page": page.number,
+                "excerpt": "Original page explicitly requested by the user.",
+                "revision": source.revision,
+                "source_version": source.version,
+                "kind": "image",
+                "original_sha256": source.sha256,
+                "original_url": f"/api/sources/{source.id}/original",
+                "page_image_url": f"/api/sources/{source.id}/pages/{page.number}/image",
+            }
+        ]
+    return []
 
 
 def _excerpt(source, page, available):

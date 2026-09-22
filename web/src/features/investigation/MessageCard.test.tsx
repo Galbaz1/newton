@@ -27,3 +27,24 @@ it('keeps a current answer and historical user message separate from stale answe
   expect(current).not.toContain('Superseded by')
   expect(user).not.toContain('Superseded by')
 })
+
+it('keeps the full source list closed until the reader asks for it', () => {
+  const html = renderToStaticMarkup(
+    <MessageCard
+      message={{
+        ...message,
+        evidence: [{
+          id: 'E1', source_id: 'source', filename: 'manual.pdf', page: 71,
+          excerpt: 'A long source excerpt that belongs in the inspector.', revision: '', source_version: 1,
+          kind: 'document', original_url: '/api/sources/source/original',
+        }],
+      }}
+      scopeRevision={1}
+      contextVersion={1}
+      onInspect={() => {}}
+    />,
+  )
+  expect(html).toContain('<details class="message-sources">')
+  expect(html).toContain('Sources used (1)')
+  expect(html).not.toContain('A long source excerpt')
+})

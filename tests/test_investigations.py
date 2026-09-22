@@ -7,7 +7,16 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from newton import auth, companies, investigation_run, investigations, providers, retrieval, sources
+from newton import (
+    auth,
+    companies,
+    documents,
+    investigation_run,
+    investigations,
+    providers,
+    retrieval,
+    sources,
+)
 from newton.config import settings
 from newton.db import Base, get_db
 from sqlalchemy import create_engine
@@ -60,11 +69,11 @@ def onboard(client, email="one@example.test"):
     return machine, investigation
 
 
-def ask(client, machine, investigation):
+def ask(client, machine, investigation, text="What evidence is available?"):
     return client.post(
         f"/api/investigations/{investigation['id']}/messages",
         json={
-            "text": "What evidence is available?",
+            "text": text,
             "model": "gpt-6-astra",
             "expected_context_version": machine["context_version"],
         },
@@ -218,3 +227,28 @@ def test_excluded_pdf_warning_cannot_reuse_its_citation_for_measurements(client,
     assert result["status"] == "complete"
     assert [record["id"] for record in result["evidence"]] == ["E1", "E3"]
     assert result["warnings"] == ["[E2] not supplied due to input limits"]
+
+
+def test_explicit_pdf_page_is_attached_before_semantic_retrieval(client, monkeypatch):
+    from test_native_pdf import synthetic_pdf
+
+    machine, investigation = onboard(client)
+    uploaded = client.post(
+        f"/api/machines/{machine['id']}/sources",
+        files={"file": ("manual.pdf", synthetic_pdf(), "application/pdf")},
+    )
+    assert uploaded.is_success, uploaded.text
+    machine = client.get(f"/api/machines/{machine['id']}").json()
+
+    def answer(_, prompt, __, images, pdfs):
+        assert images == ()
+        assert len(pdfs) == 1
+        assert documents.extract_document(pdfs[0][1], "application/pdf")[2][1] == "SOURCE THIRD"
+        assert '"page": 3' in prompt
+        return "Page 3 is available. [E1]", {}
+
+    monkeypatch.setattr(providers, "answer", answer)
+    result = ask(client, machine, investigation, "What is on page 3 of manual.pdf?").json()
+    assert result["status"] == "complete"
+    assert result["evidence"][0]["page"] == 3
+    assert result["evidence"][0]["model_input"]["original_pages"] == [2, 3, 4]

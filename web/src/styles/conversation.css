@@ -112,51 +112,33 @@
   cursor: help;
 }
 
-.evidence-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 8px;
+.message-sources {
+  color: var(--slate-700);
+  font-size: 0.8rem;
 }
 
-.evidence {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
-  height: 100%;
-  padding: 8px 10px;
-  border: 1px solid var(--slate-200);
-  border-radius: var(--radius);
-  background: var(--canvas);
-  text-align: left;
+.message-sources summary {
+  width: fit-content;
   cursor: pointer;
+  font-weight: 600;
 }
 
-.evidence:hover {
-  border-color: var(--teal-600);
-}
-
-.evidence-head {
+.message-sources ul {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 6px;
+  gap: 5px 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.evidence-file {
-  font-size: 0.8rem;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-.evidence-excerpt {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  font-size: 0.8rem;
-  color: var(--slate-700);
+.message-sources button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
 .composer {

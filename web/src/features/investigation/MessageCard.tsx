@@ -1,13 +1,8 @@
-import { FileText, Image as ImageIcon, LineChart, Tags } from 'lucide-react'
 import type { Evidence, Message } from '../../api/types'
 import { Badge, Notice } from '../../components/ui'
 import { evidenceLabel } from '../../lib/citations'
 import { formatDateTime } from '../../lib/format'
-import { parseSeriesExcerpt } from '../../lib/seriesExcerpt'
-import { SeriesExcerptSummary } from '../evidence/SeriesExcerptSummary'
 import { AnswerMarkdown } from './AnswerMarkdown'
-
-const kindIcons = { document: FileText, image: ImageIcon, timeseries: LineChart, annotation: Tags }
 
 interface Props {
   message: Message
@@ -60,33 +55,22 @@ export function MessageCard({ message, scopeRevision, contextVersion, onInspect 
       )}
 
       {message.evidence.length > 0 && (
-        <ul className="evidence-list" aria-label="Evidence">
-          {message.evidence.map((item) => {
-            const Icon = kindIcons[item.kind] ?? FileText
-            const label = labelOf(item)
-            const series = item.kind === 'timeseries' ? parseSeriesExcerpt(item.excerpt) : null
-            return (
-              <li key={item.id}>
-                <button type="button" className="evidence" onClick={() => onInspect(item, label)}>
-                  <span className="evidence-head">
-                    <span className="cite">{label}</span>
-                    <Icon size={13} aria-hidden="true" />
-                    <span className="evidence-file">{item.filename}</span>
-                    <span className="meta">
-                      {item.page ? `p. ${item.page} · ` : ''}rev. {item.revision || '—'} · v
-                      {item.source_version}
-                    </span>
-                  </span>
-                  {series ? (
-                    <SeriesExcerptSummary data={series} compact />
-                  ) : (
-                    <span className="evidence-excerpt">{item.excerpt}</span>
-                  )}
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+        <details className="message-sources">
+          <summary>Sources used ({message.evidence.length})</summary>
+          <ul aria-label="Evidence">
+            {message.evidence.map((item) => {
+              const label = labelOf(item)
+              return (
+                <li key={item.id}>
+                  <button type="button" onClick={() => onInspect(item, label)}>
+                    <span className="cite">{label}</span> {item.filename}
+                    {item.page ? ` · p. ${item.page}` : ''}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </details>
       )}
     </article>
   )

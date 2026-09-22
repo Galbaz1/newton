@@ -89,7 +89,12 @@ def _execute(
 ) -> tuple:
     run_id, scope, version = row.active_run_id, row.scope_revision, machine.context_version
     sources = source_snapshot(db, machine)
-    evidence = retrieval.search(db, machine.company_id, machine.id, body.text, row.active_until)
+    evidence = [
+        *answer_documents.exact_page_evidence(db, machine, body.text),
+        *retrieval.search(db, machine.company_id, machine.id, body.text, row.active_until),
+    ]
+    for index, record in enumerate(evidence, 1):
+        record["id"] = f"E{index}"
     visual, pngs = visual_retrieval.search(
         db, machine.company_id, machine.id, body.text, row.active_until
     )
