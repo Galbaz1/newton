@@ -173,8 +173,9 @@ def check_secrets(profile: Profile) -> None:
         raise ProfileError("MLFLOW_AUTH_ADMIN_PASSWORD missing or shorter than 12 characters")
     if not values.get("MLFLOW_FLASK_SERVER_SECRET_KEY"):
         raise ProfileError("MLFLOW_FLASK_SERVER_SECRET_KEY missing")
-    if values["MLFLOW_AUTH_ADMIN_PASSWORD"] == "password1234":
-        raise ProfileError("legacy default admin password is not allowed")
+    admin_password = values["MLFLOW_AUTH_ADMIN_PASSWORD"]
+    if admin_password.casefold().startswith("password") and admin_password[8:].isdecimal():
+        raise ProfileError("predictable default admin password is not allowed")
 
 
 def server_argv(profile: Profile, mlflow_bin: str = "mlflow") -> list[str]:

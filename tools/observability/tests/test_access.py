@@ -153,7 +153,8 @@ def _seed(svc: Service) -> None:
     auth.create_user("canary-unapproved", svc.passwords["canary-unapproved"])
 
 
-def test_unauthenticated_and_legacy_default_admin_are_denied(service):
+def test_unauthenticated_and_incorrect_admin_credentials_are_denied(service):
+    incorrect_admin = ("admin", "invalid-test-credential")
     assert (
         service.get("/ajax-api/2.0/mlflow/experiments/search", None).status_code == 401
     )  # UI data path
@@ -163,11 +164,11 @@ def test_unauthenticated_and_legacy_default_admin_are_denied(service):
     )
     assert (
         service.get(
-            f"{API}/experiments/get", ("admin", "password1234"), experiment_id=service.teaching_id
+            f"{API}/experiments/get", incorrect_admin, experiment_id=service.teaching_id
         ).status_code
         == 401
     )
-    assert service.get(f"{API}/experiments/search", ("admin", "password1234")).status_code == 401
+    assert service.get(f"{API}/experiments/search", incorrect_admin).status_code == 401
 
 
 def test_unapproved_account_sees_nothing(service):
