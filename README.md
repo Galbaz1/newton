@@ -4,10 +4,11 @@ Newton is a local workbench for investigating industrial machines. It keeps
 company context, original source files, investigations, citations and corrections
 in one application.
 
-Newton is an academic, non-commercial project released under the
-[MIT License](LICENSE). Hogeschool van Amsterdam (HvA) holds the copyright. Maker
-attribution: Wonder Why AI — Fausto Albers; see [AUTHORS.md](AUTHORS.md). Newton
-does not control machinery or certify diagnoses, components or safe operation.
+Newton is developed as an academic, non-commercial project. Its source code is
+released under the [MIT License](LICENSE), which permits commercial use.
+Hogeschool van Amsterdam (HvA) holds the copyright. Maker attribution: Wonder
+Why AI — Fausto Albers; see [AUTHORS.md](AUTHORS.md). Newton does not control
+machinery or certify diagnoses, components or safe operation.
 
 ## Run locally
 
@@ -50,7 +51,7 @@ separate Docker volumes. Services bind to loopback. Read
    or assumption when necessary. The earlier answer remains visible as
    superseded evidence.
 
-Onboarding and model answers need provider credentials and an explicit API budget.
+Autonomous onboarding and model answers need provider credentials and an explicit API budget.
 Text retrieval uses OpenAI embeddings, including when Gemini provides an answer.
 The optional private ColQwen encoder adds visual page retrieval. Source material
 sent to a selected provider leaves the computer for inference.
@@ -75,11 +76,8 @@ configured PostgreSQL, Weaviate and browser journey. Read the
 [developer guide](docs/development.md), [architecture](docs/architecture.md), and
 [contributing guide](CONTRIBUTING.md).
 
-## Source package boundary
+## Private data
 
-Keep private research archives, supplied documents, `.env`, `.runtime`, worker
-logs, Beads data and proprietary legacy code out of a source release. The
-[distribution guide](docs/distribution.md) lists the source-only boundary and
+Keep supplied documents, credentials and runtime data outside source control.
+The [distribution guide](docs/distribution.md) describes the source package and
 dependency notices.
-
-Beads (`newton-o1d`) tracks current work.

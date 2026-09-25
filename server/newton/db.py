@@ -1,4 +1,4 @@
-"""SQLAlchemy seams; sessions roll back uncommitted work when dependencies exit."""
+"""Database sessions and UTC timestamps; unfinished sessions roll back on close."""
 
 from collections.abc import Generator
 from datetime import UTC, datetime
@@ -11,7 +11,7 @@ from .config import settings
 
 
 class Base(DeclarativeBase):
-    """Shared declarative base, also available to coordinator-owned models."""
+    """Declarative base for application models."""
 
 
 class UTCDateTime(TypeDecorator):
@@ -58,7 +58,7 @@ def get_db() -> Generator[Session]:
 
 
 def init_db() -> None:
-    """Create prototype tables, including any registered coordinator models."""
+    """Create tables for registered application models."""
     from . import models, onboarding_models  # noqa: F401
     from .migrations import migrate_sources
 

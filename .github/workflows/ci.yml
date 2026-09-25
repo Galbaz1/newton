@@ -17,8 +17,12 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Keep private work outside the source package
         run: |
-          if git ls-files | grep -E '^(deployment/|research/|\.beads/|\.runtime/|\.env$)'; then
-            echo 'Private deployment, research, runtime, or credentials are tracked.' >&2
+          if git ls-files | grep -E '^(deploy/|deployment/|infra/|ops/|research/|\.beads/|\.runtime/|\.vercel/)|(^|/)\.env($|\.)|(^|/)(railway|vercel)\.(json|toml)$' | grep -v '^\.env\.example$'; then
+            echo 'Private operations, research, runtime, or credentials are tracked.' >&2
+            exit 1
+          fi
+          if git grep -I -i -l -E 'newton[.]nu|railway[.]app|vercel[.]app' -- .; then
+            echo 'Site-specific deployment references are tracked.' >&2
             exit 1
           fi
 

@@ -147,11 +147,7 @@ def _accept(
     outcome: tuple,
     status: str,
 ) -> dict:
-    """Keep session, scope, lock release and result persistence in one transaction.
-
-    This function exceeds the ordinary size target so the acceptance invariant
-    and its row locks remain visible together.
-    """
+    """Clear the active run and persist its result after rechecking session and scope."""
     run_id, scope, version = run
     db.expire_all()
     row, machine = investigation_for_user(db, user, identifier)

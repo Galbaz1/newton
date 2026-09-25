@@ -140,7 +140,7 @@ def _contain(db, run, review: Review) -> None:
     for finding in review.findings:
         source = db.get(Source, finding.target_id)
         if source and source.id not in current_sources:
-            # Earlier batches are evidence only; contain dependent new questions instead.
+            # Preserve prior batches as evidence; keep follow-up questions separate.
             affected.add(source.id)
             source = None
         if source and source.status in {"ready", "needs_text"}:

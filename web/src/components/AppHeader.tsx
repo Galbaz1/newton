@@ -10,7 +10,6 @@ interface Props {
   onSignOut: () => void
 }
 
-/** Top bar: brand, honest backend status from GET /health, account. */
 export function AppHeader({ user, health, healthError, onSignOut }: Props) {
   const { locale, setLocale, text } = useLocale()
   return (
@@ -25,7 +24,7 @@ export function AppHeader({ user, health, healthError, onSignOut }: Props) {
             </span>
             <span className="health-item">DB {health.database}</span>
             <span className="health-item">Retrieval {health.retrieval}</span>
-            <span className="health-item" title={text({ en: 'Model API budget for this local run', nl: 'Model-API-budget voor deze lokale run' })}>
+            <span className="health-item" title={text({ en: 'Shared model API budget', nl: 'Gedeeld model-API-budget' })}>
               {text({ en: 'Budget', nl: 'Budget' })} {formatEur(health.budget.spent_eur)} / {formatEur(health.budget.ceiling_eur)}
             </span>
           </>

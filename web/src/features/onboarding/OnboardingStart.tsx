@@ -22,11 +22,7 @@ interface Props {
 
 type Phase = 'form' | 'uploading' | 'review'
 
-/**
- * 'Bedrijf onboarden': company (new or existing), optional website, data class,
- * multi-file selection and start. Files are uploaded one by one; a failed file
- * leaves the run as draft so the owner can decide, nothing is retried silently.
- */
+/** Upload files one at a time; failures leave the run in draft without automatic retries. */
 export function OnboardingStart({ companies, companyId, onCompanyCreated, onOpened, onCancel }: Props) {
   const { text } = useLocale()
   const [useExisting, setUseExisting] = useState(companyId !== null)

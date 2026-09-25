@@ -45,8 +45,7 @@ conversations. A build alone does not verify this journey.
 
 Read primary upstream documentation and check official registries before changing
 an API dependency. Pin compatible versions, preserve lockfiles, and record the
-source, date and compatibility result. Context7 snippets are supporting material,
-not a release or compatibility check.
+source, date and compatibility result.
 
 A new model needs current API/pricing docs, bounded request/usage handling, spend
 reservation, focused tests and an authorized real canary. Catalogue entries do not

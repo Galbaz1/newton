@@ -1,9 +1,9 @@
 # Security and data boundaries
 
-Newton currently supports local use on a trusted machine. Bind the app and its
-services to loopback. It is not ready to expose directly to the internet or a
-shared LAN. Shared deployment needs additional identity, recovery, abuse protection,
-HTTPS, parsing isolation and tested operational controls.
+The documented installation is for local use on a trusted machine. Bind the app
+and its services to loopback. Do not expose that installation directly to the
+internet or a shared LAN. Shared deployment requires HTTPS, secure cookies,
+login abuse protection, account recovery, parsing isolation and tested backups.
 
 - Every company is owned by an application account. Source, machine, conversation
   and onboarding access is checked against that ownership; database RLS and shared
@@ -18,12 +18,11 @@ HTTPS, parsing isolation and tested operational controls.
 - Optional encoder/MLflow access is configured by your operator. This repository
   contains no grants, accounts or routes to a project owner's infrastructure.
 
-MLflow student/admin roles are application permissions, not shell or host access.
-Keep teaching and private profiles separate and reachable only through an approved
-encrypted route. Processes under the same OS account are not isolated from each
-other's files. The visual encoder is loopback-only and has no application login;
-local processes can reach it.
+Processes under the same OS account can read each other's files. The optional
+visual encoder has no application login and must remain on loopback; local
+processes can reach it.
 
-Report suspected vulnerabilities privately to the repository owner through an
-existing authorized channel. Share a minimal synthetic reproduction and affected
-version; do not post customer data, credentials or private logs in an issue.
+Report suspected vulnerabilities to a maintainer through a private channel you
+already use. A public security-reporting intake is not yet available. Do not post
+exploit details, customer data, credentials or private logs in an issue. Include
+the affected version and a minimal synthetic reproduction when possible.

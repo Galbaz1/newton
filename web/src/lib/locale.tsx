@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 
-/** Add a locale here, its label below, and each `text` entry at the call site. */
 export type Locale = 'en' | 'nl'
 
 export const localeNames: Record<Locale, string> = { en: 'English', nl: 'Nederlands' }

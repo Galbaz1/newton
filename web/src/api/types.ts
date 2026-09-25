@@ -1,7 +1,6 @@
 /**
  * Typed mirror of the Newton HTTP contract (/api/openapi.json).
- * IDs are strings and timestamps are ISO 8601 strings. Keep this file in sync
- * with the contract; nothing else in the app should describe wire shapes.
+ * IDs are strings and timestamps are ISO 8601 strings.
  */
 
 export interface User {
@@ -82,7 +81,7 @@ export interface SourceMetadata {
   channels?: SourceChannel[]
   profile?: Record<string, unknown>
   findings?: Finding[]
-  /** Absent on older sources: absolute. */
+  /** Defaults to absolute when omitted. */
   time_basis?: 'absolute' | 'source_local'
   /** Onboarding provenance; `reason` explains quarantine when set. */
   onboarding?: { reason?: string; [key: string]: unknown }
@@ -101,7 +100,6 @@ export interface Source {
   sha256: string
   kind: SourceKind
   status: SourceStatus
-  /** Absent on servers that predate the onboarding contract. */
   data_class?: SourceDataClass
   revision: string
   version: number
@@ -136,7 +134,7 @@ export interface Series {
     end: string | null
   }
   truncated: boolean
-  /** Absent on older fixtures: absolute. Source-local strings carry no offset. */
+  /** Defaults to absolute when omitted. Source-local strings carry no offset. */
   time_basis?: 'absolute' | 'source_local'
 }
 
@@ -249,8 +247,6 @@ export interface Readiness {
   source_count: number
 }
 
-/* Autonomous onboarding API types. */
-
 export type OnboardingStatus =
   | 'draft'
   | 'running'
@@ -309,7 +305,6 @@ export interface OnboardingQuestion {
   machine_id: string | null
   source_ids: string[]
   reason: string
-  /** Absent on questions retained from older runs. */
   capability?: 'document_lookup' | 'measurement_summary' | 'missing'
   /** Exact, backend-validated scope for measurement_summary questions. */
   measurement?: QuestionMeasurement

@@ -1,8 +1,6 @@
 # Application architecture
 
-Newton owns investigation context, evidence and corrections. The application uses
-ordinary Python services. Pydantic AI, MCP and Jev are evaluated separately and
-are not runtime requirements.
+Newton keeps investigation context, evidence and corrections in Python services.
 
 ```mermaid
 flowchart LR
@@ -82,8 +80,9 @@ The Gemini Interactions loop uses `store=false`, a maximum of forty turns, signe
 step history and rebuilt context from validated SQL state when the input reaches
 its bound. The worker validates tool arguments against declared Pydantic schemas.
 
-Naive timestamps keep `source_local` semantics. Start-up applies `migrations.py`
-before `create_all` and marks interrupted runs as paused.
+Autonomous intake can retain unzoned timestamps as `source_local` when their
+timezone is unknown. Start-up applies `migrations.py` before `create_all` and
+marks interrupted runs as paused.
 
 ## Source layout
 
@@ -101,6 +100,5 @@ before `create_all` and marks interrupted runs as paused.
 | `migrations.py`, `index_lock.py`, `source_scope.py` | Source migrations, locks and company-library scope |
 | `web/src/features` | Account, source and investigation journeys |
 
-Python modules live in `server/newton`. The local implementation has not
-established industrial diagnostic accuracy, general model quality or production
-security.
+Python modules live in `server/newton`. Local tests do not establish industrial
+diagnostic accuracy or production security.

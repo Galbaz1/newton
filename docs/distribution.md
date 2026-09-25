@@ -3,7 +3,7 @@
 Newton is released under the [MIT License](../LICENSE). Hogeschool van Amsterdam
 (HvA) holds the copyright. [AUTHORS.md](../AUTHORS.md) records maker attribution.
 
-The public package contains application source, tests, setup and configuration
+The source package contains application source, tests, setup and configuration
 templates, locked dependencies and developer documentation. Dependencies install
 from upstream distributions. It excludes customer material, private research,
 credentials, runtime state, model weights, installed environments and compiled

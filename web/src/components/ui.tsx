@@ -1,4 +1,3 @@
-/** Small presentational primitives shared by all features. No data fetching. */
 import { AlertTriangle, CheckCircle2, CircleDashed, Info, Loader2, XCircle } from 'lucide-react'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { useLocale } from '../lib/locale'
