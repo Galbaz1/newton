@@ -22,7 +22,8 @@ Processes under the same OS account can read each other's files. The optional
 visual encoder has no application login and must remain on loopback; local
 processes can reach it.
 
-Report suspected vulnerabilities to a maintainer through a private channel you
-already use. A public security-reporting intake is not yet available. Do not post
-exploit details, customer data, credentials or private logs in an issue. Include
-the affected version and a minimal synthetic reproduction when possible.
+Report suspected vulnerabilities privately to
+[fausto@stepintoliquid.nl](mailto:fausto@stepintoliquid.nl) with “Newton security”
+in the subject. Include the affected version or commit, the impact and a minimal
+synthetic reproduction when possible. Do not post exploit details, customer data,
+credentials or private logs in an issue or pull request.

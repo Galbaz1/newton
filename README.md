@@ -73,11 +73,19 @@ Backend tests use temporary SQLite databases, temporary files and mocked paid
 providers. They cover ownership, source bytes, CSV validation, corrections,
 session revocation and budget admission. They do not replace checks against the
 configured PostgreSQL, Weaviate and browser journey. Read the
-[developer guide](docs/development.md), [architecture](docs/architecture.md), and
-[contributing guide](CONTRIBUTING.md).
+[developer guide](docs/development.md) and [architecture](docs/architecture.md).
 
 ## Private data
 
 Keep supplied documents, credentials and runtime data outside source control.
 The [distribution guide](docs/distribution.md) describes the source package and
 dependency notices.
+
+## Contribute
+
+Start with the [contributing guide](CONTRIBUTING.md). It explains how to propose
+changes, run checks and keep private data out of issues and pull requests. The
+[open issues](https://github.com/Galbaz1/newton/issues) include work marked
+[`good first issue`](https://github.com/Galbaz1/newton/labels/good%20first%20issue)
+for new contributors. Report security concerns privately as described in
+[SECURITY.md](SECURITY.md).
