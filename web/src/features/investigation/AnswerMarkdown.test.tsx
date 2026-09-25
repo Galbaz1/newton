@@ -51,10 +51,10 @@ describe('AnswerMarkdown', () => {
   })
 
   it('never emits raw HTML, scripts or event handlers', () => {
-    const html = render('<script>alert(1)</script><img src=x onerror=alert(1)>\n\n<b onclick="x()">hi</b>')
+    const html = render('<SCRIPT>alert(1)</SCRIPT><img src=x onerror=alert(1)>\n\n<b onclick="x()">hi</b>')
     // The HTML survives only as escaped, inert text: no real tag is produced.
-    expect(html).not.toMatch(/<script|<img|<b[ >]/)
-    expect(html).toContain('&lt;script&gt;')
+    expect(html).not.toMatch(/<script|<img|<b[ >]/i)
+    expect(html).toContain('&lt;SCRIPT&gt;')
     expect(html).toContain('&lt;b onclick=')
   })
 
