@@ -12,8 +12,9 @@ onboarding researches public company information, profiles uploaded material and
 prepares source-backed installation candidates. Public research is context, not
 proof of ownership or installed-machine identity.
 
-For manual entry, add a machine with its manufacturer, model, location or function,
-and known operating conditions. These fields are user-provided descriptions.
+For manual entry, add a machine with its manufacturer and model. Use its
+description for location, function and known operating conditions. These are
+user-provided descriptions.
 Select the machine before uploading a source or asking a question.
 
 Manual upload accepts PDF, UTF-8 TXT/MD, PNG/JPEG/WebP and UTF-8 CSV files up to
@@ -27,7 +28,7 @@ the transformation when you convert an unsupported file.
 | State | Meaning and next action |
 | --- | --- |
 | Missing capability | Upload a relevant original. Newton does not add sample data. |
-| Missing input: mapping | Select CSV timestamp, value and unit fields. Keep an unknown timezone as source-local time. |
+| Missing input: mapping | Select CSV timestamp, value and unit fields. Leave an unknown timezone unresolved; see [Correct context](#correct-context). |
 | Quarantined | Inspect the original and resolve the uncertain interpretation before using it. |
 | No extracted text | Inspect the original pages or configure visual retrieval. |
 | Error on a retained source | Read the error, correct the mapping or upload corrected bytes. The original remains available. |
@@ -49,9 +50,12 @@ A structurally valid mapping that cannot interpret the original data is saved wi
 an error state. Correct the mapping and save it again; the selected columns and
 unit remain visible.
 
-Use source-local time when a timestamp has no confirmed timezone. Add `UTC` only
-when the source timestamps are UTC. Source revisions, mappings and machine context
-can be corrected. Earlier answers retain their evidence and are marked superseded.
+For unzoned timestamps without a confirmed timezone, the API accepts a mapping
+with `time_basis: "source_local"` and no timezone. The manual mapping form cannot
+select that basis; leave the CSV unmapped there until its timezone is established,
+or use the API. Enter `UTC` only when the source establishes UTC. Source revisions,
+mappings and machine context can be corrected. Earlier answers retain their
+evidence and are marked superseded.
 
 Rejected uploads create no source. After a network error, refresh the source list
 and check filename, hash and state before uploading again. The onboarding worker
@@ -65,7 +69,7 @@ inspect a supplied source, resolve required mappings, ask a question with a
 configured provider, open cited evidence, and correct a source or assumption.
 Other accounts must not access those resources.
 
-Synthetic tests and browser receipts cover this local flow. They do not establish
-company approval of sources, equipment applicability or independent use by a
-student. Setup and new connectors need developer or operator work. See
+The automated tests use synthetic data. They do not establish company approval
+of sources, equipment applicability or independent use by a mechanic. Setup and
+new connectors need developer or operator work. See
 [setup](../README.md) and [development](development.md).

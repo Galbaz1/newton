@@ -7,7 +7,7 @@
 [![Wonder Why AI](docs/assets/wonderwhy-logo.svg)](https://wonderwhy.ai/)
 
 Newton's software and its accompanying project documentation are available under
-the [MIT License](LICENSE). Repository visibility is currently intended to remain private.
+the [MIT License](LICENSE).
 
 Customer data, private recordings and third-party material are outside this source
 release. Dependencies retain their own licenses. Brand names and logos remain the

@@ -7,7 +7,7 @@ export type TimeBasis = 'absolute' | 'source_local'
 
 export const SOURCE_LOCAL_LABEL = 'Bronkloktijd · tijdzone onbevestigd'
 
-/** Older fixtures omit the field; they are absolute. */
+/** Treat an omitted basis as absolute. */
 export function timeBasisOf(value: string | null | undefined): TimeBasis {
   return value === 'source_local' ? 'source_local' : 'absolute'
 }

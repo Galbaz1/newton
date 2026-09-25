@@ -1,4 +1,3 @@
-/** One function per contract endpoint. Add new endpoints here, types in types.ts. */
 import { apiUrl, del, get, requestUrl, sendForm, sendJson } from './http'
 import type {
   Company,

@@ -64,7 +64,7 @@ def run_json(db, run: OnboardingRun) -> dict:
     for key in ("events", "questions", "pending_questions", "reviews"):
         result[key] = run.state.get(key, [])
     if run.state.get("agent_finished"):
-        # Generated prose previously misstated counts and claimed unseen images were inspected.
+        # Derive final counts from stored items, never from generated prose.
         items = result["items"]
         ready = sum(i["status"] in {"ready", "needs_text"} for i in items)
         quarantined = sum(i["status"] == "quarantined" for i in items)

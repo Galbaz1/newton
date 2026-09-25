@@ -1,8 +1,9 @@
 # Local configuration
 
-Test readiness, restart and upgrades in the target environment before using real
-material. HTTP request bodies are limited to 65 MiB; machine uploads to 25 MiB;
-onboarding files to 64 MiB.
+Test readiness, restart and upgrades before using real material. HTTP request
+bodies are limited to 65 MiB. The manual upload form accepts files up to 25 MiB;
+autonomous onboarding accepts files up to 64 MiB. The API's file reader limits
+individual uploads to 64 MiB.
 
 Run from the repository root. Settings load from environment variables and root
 `.env`; environment takes precedence. Setup creates database and Weaviate

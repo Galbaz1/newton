@@ -26,7 +26,7 @@ projection weights, attention settings and MPS placement before reporting ready.
 Do not substitute a public bind address or launch multiple model workers.
 
 Configure Newton with `NEWTON_VISUAL_ENCODER_URL=http://127.0.0.1:18766`.
-For your own approved remote host, use an authenticated SSH local forward to that
+For a remote host you control, use an authenticated SSH local forward to its
 loopback port; Newton accepts only a loopback HTTP encoder URL. The service has
 no application login and rejects browser Origin headers. Local processes can
 still call it: the Newton core owns tenant authorization.

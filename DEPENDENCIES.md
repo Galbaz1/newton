@@ -16,5 +16,5 @@ weights are not part of this source distribution.
 
 Newton software and accompanying project documentation use the [MIT License](LICENSE).
 Copyright (c) 2026 Hogeschool van Amsterdam. Created by
-[Wonder Why AI — Fausto Albers](AUTHORS.md). Repository access remains private;
-third-party dependencies and customer material retain their own terms.
+[Wonder Why AI — Fausto Albers](AUTHORS.md). Third-party dependencies and customer
+material retain their own terms.

@@ -1,7 +1,4 @@
-/**
- * Minimal fetch wrapper. Every request is a relative `/api` URL with cookie
- * credentials; there is deliberately no base-URL setting and no mock fallback.
- */
+/** Same-origin `/api` requests with cookie credentials. */
 
 const API_PREFIX = '/api'
 
@@ -74,7 +71,7 @@ export async function requestUrl<T>(url: string, init: RequestInit = {}): Promis
       headers: { Accept: 'application/json', ...init.headers },
     })
   } catch {
-    throw new ApiError(0, 'The Newton server could not be reached. Is the backend running?')
+    throw new ApiError(0, 'Could not connect to Newton. Check your connection and try again.')
   }
   if (response.status === 401 && !url.startsWith(`${API_PREFIX}/auth/`)) {
     window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT))

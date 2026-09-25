@@ -1,4 +1,4 @@
-"""Small additive migration for the local PostgreSQL prototype.
+"""Migrate existing PostgreSQL source tables.
 
 Operators back up the database before upgrading. No originals or historical answer
 snapshots are rewritten. SQLite tests create the current schema from scratch.
@@ -20,7 +20,7 @@ def migrate_sources(engine) -> None:
     if "data_class" in columns and columns["machine_id"]["nullable"]:
         return
     if engine.dialect.name != "postgresql":
-        raise RuntimeError("Upgrade existing local data using PostgreSQL and a database backup")
+        raise RuntimeError("Existing data requires PostgreSQL migration and a database backup")
     constraints = schema.get_check_constraints("sources")
     with engine.begin() as connection:
         connection.execute(text("SET LOCAL lock_timeout = '5s'"))

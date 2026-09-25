@@ -1,9 +1,9 @@
 # Optional MLflow
 
-Run experiment tracking on your own approved infrastructure. Newton writes a
+Run experiment tracking on infrastructure you control. Newton writes a
 local, sanitized metadata outbox; this tool explicitly synchronizes it to a
-configured MLflow service. Nothing in the main application connects automatically
-to a project owner's server. Tenant originals and full model prompts are excluded
+configured MLflow service. The main application does not connect to MLflow
+automatically. Tenant originals and full model prompts are excluded
 from the snapshot schema; identifiers and metrics still deserve private handling.
 
 ## Install an authenticated service

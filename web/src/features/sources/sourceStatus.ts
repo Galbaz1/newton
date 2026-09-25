@@ -9,7 +9,6 @@ interface StatusInfo {
   explain: (source: Source) => string
 }
 
-/** Single place that words source states; cards and the inspector both use it. */
 function sourceStatus(locale: Locale): Record<SourceStatus, StatusInfo> {
   const text = (en: string, nl: string) => locale === 'nl' ? nl : en
   return {
