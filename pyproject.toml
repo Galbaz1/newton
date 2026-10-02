@@ -17,7 +17,7 @@ dependencies = [
   "python-multipart==0.0.32",
   "pypdfium2==5.13.0",
   "pillow==12.3.0",
-  "httpx2==2.13.0",
+  "httpx2==2.13.1",
   "weaviate-client==4.23.1",
 ]
 
