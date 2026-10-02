@@ -7,7 +7,7 @@ authors = [{name = "Wonder Why AI — Fausto Albers"}]
 description = "Private loopback-only pinned visual encoder"
 requires-python = ">=3.14"
 dependencies = [
-  "fastapi==0.141.1",
+  "fastapi==0.142.0",
   "uvicorn==0.53.0",
   "pydantic==2.13.5",
   "anyio==4.15.1",
