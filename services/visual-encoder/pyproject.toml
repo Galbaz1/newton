@@ -8,7 +8,7 @@ description = "Private loopback-only pinned visual encoder"
 requires-python = ">=3.14"
 dependencies = [
   "fastapi==0.141.1",
-  "uvicorn==0.53.0",
+  "uvicorn==0.54.0",
   "pydantic==2.13.5",
   "anyio==4.15.1",
   "starlette==1.6.0",
