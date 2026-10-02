@@ -9,7 +9,7 @@ requires-python = ">=3.14"
 dependencies = [
   "fastapi==0.141.1",
   "starlette==1.6.0",
-  "uvicorn==0.53.0",
+  "uvicorn==0.54.0",
   "sqlalchemy==2.0.54",
   "psycopg[binary]==3.3.6",
   "pydantic==2.13.5",
