@@ -6,7 +6,7 @@ license-files = ["LICENSE"]
 authors = [{name = "Wonder Why AI — Fausto Albers"}]
 description = "Local loopback MLflow service and idempotent evidence synchronizer for Newton"
 requires-python = ">=3.10"
-dependencies = ["mlflow[auth,mcp]==3.16.1"]
+dependencies = ["mlflow[auth,mcp]==3.17.1"]
 
 [dependency-groups]
 dev = ["pytest==9.1.1"]
