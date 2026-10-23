@@ -16,7 +16,7 @@ dependencies = [
   "pydantic-settings==2.15.0",
   "python-multipart==0.0.32",
   "pypdfium2==5.13.0",
-  "pillow==12.3.0",
+  "pillow==13.0.0",
   "httpx2==2.13.0",
   "weaviate-client==4.23.1",
 ]
