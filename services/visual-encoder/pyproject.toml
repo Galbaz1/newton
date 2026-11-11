@@ -19,7 +19,7 @@ dependencies = [
   "huggingface-hub==1.32.0",
   "safetensors==0.8.0",
   "numpy==2.5.3",
-  "pillow==12.3.0",
+  "pillow==13.0.0",
 ]
 
 [dependency-groups]
